@@ -2,7 +2,8 @@ import fetch from 'node-fetch'
 
 import { flatMap } from '../utils/array'
 
-import { TECHNICAL_URL, TechnicalResult, TechnicalType, TESLA_VARIANTS } from './api/technical'
+import { TECHNICAL_URL, TechnicalResult, TechnicalType } from './api/technical'
+import { TESLA_VARIANTS } from './api/general'
 
 const fetchTechicalPage = async (variant: string, page: number): Promise<TechnicalResult> => {
   console.info(`Fetching page ${page}`)

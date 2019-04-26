@@ -3,17 +3,23 @@ import fetch from 'node-fetch'
 
 import { getAllTypes } from './data/technical'
 import { getAllByUndercarriage } from './data/undercarriage'
+import { getAllTypeApproved } from './data/typeapproved'
+import { TypeApproved } from './data/api/typeapproved'
 
 const handler = async (req: IncomingMessage, res: ServerResponse) => {
-  const types = await getAllTypes()
+  //const types = await getAllTypes()
+  //const undercarriages = types.map(type => type.understellsnr)
 
-  const undercarriages = types.map(type => type.understellsnr)
+  const allTypeApproved: TypeApproved[] = await getAllTypeApproved()
+  const typeApprovedNumbers: string[] = allTypeApproved
+    .map(typeApproved => typeApproved.typegodkjenningsnr)
+    .slice(0, 20)
 
-  console.log(undercarriages.length)
+  console.log(typeApprovedNumbers.length)
 
-  const test = await getAllByUndercarriage(undercarriages)
+  const test = await getAllByUndercarriage(typeApprovedNumbers)
 
-  console.log(test)
+  console.log(test.length)
 
   res.end(JSON.stringify({ message: 'ayy' }))
 }

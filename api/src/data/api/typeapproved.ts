@@ -1,67 +1,66 @@
 import { PaginatedResult } from './general'
 
-export const TECHNICAL_URL = 'https://hotell.difi.no/api/json/vegvesen/tekn'
+export const TYPE_APPROVED_URL = 'https://hotell.difi.no/api/json/vegvesen/typg'
 
-export type TechnicalType = {
+export type TypeApproved = {
   bredde: string
-  sporvidde_foran: string
+  motormerking: string
+  eu_hovednummer: string
   std_dekk_foran: string
+  till_foraksellast: string
+  ramme_karosseri: string
   sitteplasser: string
-  reg_aar: string
   min_li_bak: string
-  vrakpant_utbetalt: string
+  co2_utslipp: string
   min_innpress_bak: string
   typebetegnelse: string
+  drivende_hjul: string
   euronorm_ny: string
-  sist_pkk_godkjent: string
+  variant: string
   partikkelutslipp: string
-  eu_variant: string
+  till_bakaksellast: string
   fab_mont_partikkelfilter: string
-  max_belastning_h_fest: string
-  avreg_dato: string
   max_taklast: string
-  reg1g: string
-  reg_forsteg_norge: string
-  tilhengervek_m_brems: string
   slagvolum: string
-  akseltrykk_bak: string
+  tilhengervekt_u_brem: string
   antall_aksler: string
+  vognkort_anm: string
+  identitet_anm: string
   hybrid: string
   egenvekt: string
-  sporvidde_bak: string
+  max_belastning_h_feste: string
   totalvekt: string
-  tilhengervekt_u_brems: string
   drivstoff_forbruk: string
+  girkasse: string
   merkekode: string
-  euronorm: string
   drivstoff: string
   lengde_til_tilhkobling: string
-  neste_pkk: string
   modellbetegnelse: string
-  co2_utslippp: string
-  eu_versjon: string
-  akseltrykk_foran: string
-  understellsnr: string
   min_hast_bak: string
   kjoretoygruppe: string
   min_hast_foran: string
   std_felg_bak: string
   std_felg_foran: string
-  siste_reg_dato: string
+  maks_sporv_bak: string
+  stand_dba: string
   hybrid_kategori: string
   motorytelse: string
+  typegodkjenningsnr: string
+  gyldig_fra_unr: string
+  versjon: string
   antall_aksler_drift: string
   vogntogvekt: string
   ytelsesmaal: string
-  bruktimportert: string
+  omdreininger: string
   nox_utslipp: string
+  tilhengervekt_m_brems: string
   lengde: string
+  maks_sporv_foran: string
   min_li_foran: string
   min_innpress_foran: string
-  farge: string
   std_dekk_bak: string
 }
 
-export interface TechnicalResult extends PaginatedResult {
-  entries: TechnicalType[]
+export interface TypeApprovedResult extends PaginatedResult {
+  entries: TypeApproved[]
 }

@@ -4,11 +4,11 @@ import { flatMap } from '../utils/array'
 
 import { UNDERCARRIAGE_URL, UndercarriageResult, UndercarriageType } from './api/undercarriage'
 
-const fetchCarriagePage = async (undercarriageNumber: string, page: number): Promise<UndercarriageResult> => {
-  console.info(`Fetching undercarriage ${undercarriageNumber} page ${page}`)
+const fetchCarriagePage = async (typeNumber: string, page: number): Promise<UndercarriageResult> => {
+  console.info(`Fetching type number ${typeNumber} page ${page}`)
 
   try {
-    const response = await fetch(`${UNDERCARRIAGE_URL}?understellsnr=${undercarriageNumber}&page=${page}`)
+    const response = await fetch(`${UNDERCARRIAGE_URL}?typegodkjenningsnr=${typeNumber}&page=${page}`)
     const result: UndercarriageResult = await response.json()
 
     return result
@@ -18,8 +18,8 @@ const fetchCarriagePage = async (undercarriageNumber: string, page: number): Pro
   }
 }
 
-const getAllPagesForCarriage = async (carriage: string): Promise<UndercarriageType[]> => {
-  const initialPage = await fetchCarriagePage(carriage, 1)
+const getAllPagesForCarriage = async (typeNumber: string): Promise<UndercarriageType[]> => {
+  const initialPage = await fetchCarriagePage(typeNumber, 1)
   const pages = initialPage.pages
 
   if (pages < 1) {
@@ -28,7 +28,7 @@ const getAllPagesForCarriage = async (carriage: string): Promise<UndercarriageTy
 
   const remainingPagesPromises: Promise<UndercarriageResult>[] = Array(pages - 1)
     .fill({})
-    .map((_, index) => fetchCarriagePage(carriage, index + 2))
+    .map((_, index) => fetchCarriagePage(typeNumber, index + 2))
 
   const remainingResult = await Promise.all(remainingPagesPromises)
 
