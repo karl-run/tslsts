@@ -2,7 +2,7 @@ import { flatMap } from '../utils/array'
 
 import PaginatedResultFetcher from '../utils/PaginatedResultFetcher'
 
-import { CARS_URL, CarsResult, CarType } from './api/undercarriage'
+import { CARS_URL, CarsResult, CarType } from './api/cars'
 
 const createFetcherByTypeApprovedNumbers = (typeApprovedNumbers: string[]): Promise<CarType[]>[] =>
   typeApprovedNumbers.map(typeNumber =>
