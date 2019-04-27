@@ -1,6 +1,6 @@
-import { PaginatedResult } from './general'
+import { BASE_URL, PaginatedResult } from './general'
 
-export const TYPE_APPROVED_URL = 'https://hotell.difi.no/api/json/vegvesen/typg'
+export const TYPE_APPROVED_URL = `${BASE_URL}/typg`
 
 export type TypeApproved = {
   bredde: string
@@ -61,6 +61,4 @@ export type TypeApproved = {
   std_dekk_bak: string
 }
 
-export interface TypeApprovedResult extends PaginatedResult {
-  entries: TypeApproved[]
-}
+export type TypeApprovedResult = PaginatedResult<TypeApproved>

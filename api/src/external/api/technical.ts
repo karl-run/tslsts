@@ -1,6 +1,6 @@
-import { PaginatedResult } from './general'
+import { BASE_URL, PaginatedResult } from './general'
 
-export const TECHNICAL_URL = 'https://hotell.difi.no/api/json/vegvesen/tekn'
+export const TECHNICAL_URL = `${BASE_URL}/tekn`
 
 export type TechnicalType = {
   bredde: string
@@ -62,6 +62,4 @@ export type TechnicalType = {
   std_dekk_bak: string
 }
 
-export interface TechnicalResult extends PaginatedResult {
-  entries: TechnicalType[]
-}
+export type TechnicalResult = PaginatedResult<TechnicalType>

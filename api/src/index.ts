@@ -1,23 +1,18 @@
-import { createServer, IncomingMessage, ServerResponse } from 'http'
 import fetch from 'node-fetch'
+import { createServer, IncomingMessage, ServerResponse } from 'http'
 
-import { getAllTypes } from './data/technical'
-import { getAllByUndercarriage } from './data/undercarriage'
-import { getAllTypeApproved } from './data/typeapproved'
-import { TypeApproved } from './data/api/typeapproved'
+import { getAllTechnicalForVariants } from './external/technical'
+import { getAllCarsByTypeApprovedNumbers } from './external/cars'
+import { getAllTypeApproved } from './external/typeapproved'
+import { TypeApproved } from './external/api/typeapproved'
 
 const handler = async (req: IncomingMessage, res: ServerResponse) => {
-  //const types = await getAllTypes()
-  //const undercarriages = types.map(type => type.understellsnr)
-
   const allTypeApproved: TypeApproved[] = await getAllTypeApproved()
   const typeApprovedNumbers: string[] = allTypeApproved
     .map(typeApproved => typeApproved.typegodkjenningsnr)
-    .slice(0, 20)
+    .slice(0, 5)
 
-  console.log(typeApprovedNumbers.length)
-
-  const test = await getAllByUndercarriage(typeApprovedNumbers)
+  const test = await getAllCarsByTypeApprovedNumbers(typeApprovedNumbers)
 
   console.log(test.length)
 
