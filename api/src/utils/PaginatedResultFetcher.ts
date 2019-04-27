@@ -3,6 +3,8 @@ import fetch from 'node-fetch'
 import { flatMap } from './array'
 
 import { PaginatedResult } from '../external/api/general'
+
+import logger from './logging'
 import { wait } from './promise'
 
 class PaginatedResultFetcher<R, T extends PaginatedResult<R>> {
@@ -15,7 +17,7 @@ class PaginatedResultFetcher<R, T extends PaginatedResult<R>> {
     this.id = id
     this.throttle = throttle
 
-    console.info(`Setting up paginated result fetcher${this.makeIdString()}(${url})`)
+    logger.info(`Setting up paginated result fetcher${this.makeIdString()}(${url})`)
   }
 
   private makeIdString(): string {
@@ -35,10 +37,10 @@ class PaginatedResultFetcher<R, T extends PaginatedResult<R>> {
   }
 
   private async fetchPage(page: number): Promise<T> {
-    console.info(
+    logger.info(
       `Fetching${this.makeIdString()}page ${page} (throttled: ${
         this.throttle ? `yes (${this.createDelay(page)})` : 'no'
-      })`,
+        })`,
     )
 
     if (this.throttle) {
@@ -49,7 +51,7 @@ class PaginatedResultFetcher<R, T extends PaginatedResult<R>> {
       const response = await fetch(`${this.URL}&page=${page}`)
       return await response.json()
     } catch (e) {
-      console.error('Something went wrong')
+      logger.error('Something went wrong')
       throw e
     }
   }
@@ -75,7 +77,7 @@ class PaginatedResultFetcher<R, T extends PaginatedResult<R>> {
 
     const cumulativeResult: R[] = [...initialPage.entries, ...flatMap(remainingResult, result => result.entries)]
 
-    console.info(`There are ${cumulativeResult.length} units of ${this.makeIdString()}`)
+    logger.info(`There are ${cumulativeResult.length} units${this.makeIdString()}`)
 
     return cumulativeResult
   }
