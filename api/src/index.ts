@@ -8,15 +8,15 @@ import { TypeApproved } from './external/api/typeapproved'
 
 const handler = async (req: IncomingMessage, res: ServerResponse) => {
   const allTypeApproved: TypeApproved[] = await getAllTypeApproved()
-  const typeApprovedNumbers: string[] = allTypeApproved
-    .map(typeApproved => typeApproved.typegodkjenningsnr)
-    .slice(0, 5)
+  const typeApprovedNumbers: string[] = allTypeApproved.map(typeApproved => typeApproved.typegodkjenningsnr)
 
-  const test = await getAllCarsByTypeApprovedNumbers(typeApprovedNumbers)
-
-  console.log(test.length)
-
-  res.end(JSON.stringify({ message: 'ayy' }))
+  try {
+    const test = await getAllCarsByTypeApprovedNumbers(typeApprovedNumbers)
+    console.log(test.length)
+    res.end(JSON.stringify({ message: `There are ${test.length} cars` }))
+  } catch (e) {
+    res.end(JSON.stringify({ message: 'Something went wrong' }))
+  }
 }
 
 if (!process.env.IS_NOW) {
