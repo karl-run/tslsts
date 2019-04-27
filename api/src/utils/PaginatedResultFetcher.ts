@@ -32,7 +32,7 @@ class PaginatedResultFetcher<R, T extends PaginatedResult<R>> {
   }
 
   private createRemainingPagesPromises(pages: number): Promise<T>[] {
-    const createPromise = (_, index) => this.fetchPage(index + 2)
+    const createPromise = ({}, index: number) => this.fetchPage(index + 2)
 
     return Array(pages - 1)
       .fill({})

@@ -1,5 +1,9 @@
 {
+  "name": "tslsts",
   "version": 2,
+  "alias": ["tslsts.karl.run"],
+  "builds": [{ "src": "./api/src/index.ts", "use": "@now/node" }],
+  "routes": [{ "src": "/api/(.*)", "dest": "/api/src/$1" }],
   "env": {
     "IS_NOW": "true"
   }
