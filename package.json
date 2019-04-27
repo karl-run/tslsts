@@ -1,7 +1,6 @@
 {
   "name": "tslsts-monorepo",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:karl-run/tslsts.git",
   "author": "Karl J. Overå <k@rl.run>",
   "license": "MIT",

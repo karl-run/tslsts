@@ -2,8 +2,20 @@
   "name": "tslsts",
   "version": 2,
   "alias": ["tslsts.karl.run"],
-  "builds": [{ "src": "./api/src/index.ts", "use": "@now/node" }],
-  "routes": [{ "src": "/api/(.*)", "dest": "/api/src/$1" }],
+  "builds": [
+    {
+      "src": "/api/src/index.ts",
+      "use": "@now/node"
+    },
+    {
+      "src": "/web/package.json",
+      "use": "@now/next"
+    }
+  ],
+  "routes": [
+    { "src": "/api/test", "dest": "/api/src/index.ts" },
+    { "src": "/(.*)", "dest": "/web/$1" }
+  ],
   "env": {
     "IS_NOW": "true"
   }
