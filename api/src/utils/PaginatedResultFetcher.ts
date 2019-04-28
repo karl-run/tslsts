@@ -12,7 +12,7 @@ class PaginatedResultFetcher<R, T extends PaginatedResult<R>> {
   private readonly id?: string
   private readonly throttle: number | null
 
-  constructor(url: string, id?: string, throttle: number = 100) {
+  constructor(url: string, id?: string, throttle: number = 150) {
     this.URL = url
     this.id = id
     this.throttle = throttle

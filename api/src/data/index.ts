@@ -1,6 +1,7 @@
 import Knex from 'knex'
 import logger from '../utils/logging'
 import { IndividualCar } from '../external/api/general'
+import { CarType } from '../external/api/cars'
 
 const IS_DEV = process.env.NODE_ENV !== 'production'
 
@@ -20,8 +21,7 @@ type CarTable = {
   registered_year: string
   color: string
 }
-  ;
-(async () => {
+;(async () => {
   if (IS_DEV) {
     logger.warn('Running in dev DROP ALL mode')
     await db.schema.dropTable('cars')
@@ -42,14 +42,39 @@ type CarTable = {
   })
 })()
 
+const mapToCar = (car: IndividualCar): CarTable => ({
+  vin: car.understellsnr,
+  registered_year: car.siste_reg_dato,
+  color: car.farge,
+})
+
 export const newCar = async (car: IndividualCar) => {
-  const data: CarTable = {
-    vin: car.understellsnr,
-    registered_year: car.siste_reg_dato,
-    color: car.farge,
-  }
+  const data: CarTable = mapToCar(car)
 
   logger.debug(`Inserting ${data.vin}`)
 
   await db(CARS).insert(data)
+}
+
+export const newCars = async (cars: IndividualCar[]) => {
+  await db.transaction(async trx => {
+    const inserts = cars.map(car =>
+      db(CARS)
+        .insert(mapToCar(car))
+        .transacting(trx),
+    )
+
+    try {
+      await Promise.all(inserts)
+      await trx.commit()
+    } catch (e) {
+      console.log(e)
+      logger.error(`Transaction failed, reason: ${e.message}`)
+      await trx.rollback()
+    }
+  })
+}
+
+export const lastCars = async (): Promise<CarType[]> => {
+  return db(CARS).select()
 }
