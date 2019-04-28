@@ -1,3 +1,10 @@
-.testa {
-  width: 90%;
+$desktop-margin: 64px;
+$mobile-margin: 12px;
+
+.contentWrapper {
+  margin: 69px $desktop-margin $desktop-margin;
+
+  @media screen and (max-width: 640px) {
+    margin: 69px $mobile-margin $mobile-margin;
+  }
 }

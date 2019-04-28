@@ -6,7 +6,7 @@ import css from './index.scss'
 
 const Index = props => (
   <main>
-    <section className={css.test}>TODO: {props.value}</section>
+    <section className={css.index}>TODO: {props.value}</section>
   </main>
 )
 

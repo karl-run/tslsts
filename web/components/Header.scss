@@ -1,5 +1,35 @@
 .header {
-  background-color: palegoldenrod;
+  background-color: white;
   height: 48px;
-  box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
+  width: 100%;
+  box-shadow: 0 3px 3px rgba(1, 1, 1, 0.5);
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  justify-content: space-between;
+
+  .left {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    padding-right: 16px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtext {
+    font-size: 0.8rem;
+    margin-left: 8px;
+    height: 2rem;
+    display: flex;
+    align-items: flex-end;
+  }
 }
