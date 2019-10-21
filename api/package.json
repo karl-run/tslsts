@@ -14,7 +14,7 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
-    "knex": "^0.16.5",
+    "knex": "^0.19.5",
     "node-fetch": "^2.3.0",
     "winston": "^3.2.1"
   }
